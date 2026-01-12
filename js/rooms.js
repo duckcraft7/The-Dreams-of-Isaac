@@ -1,65 +1,43 @@
 window.addEventListener('DOMContentLoaded', () => {
-  const scene = document.getElementById('scene')
-  const roomEl = document.getElementById('room')
+  const room = document.getElementById('room')
   const godRig = document.getElementById('godRig')
 
-  let currentRoom = 0
-
-  // definição das salas (por enquanto vazias)
-  const rooms = [
-    { name: 'basement_1' },
-    { name: 'basement_2' },
-    { name: 'basement_3' }
-    // sala final (Isaac) depois
-  ]
+  let roomIndex = 0
+  const rooms = ['dream_1', 'dream_2', 'dream_3']
 
   function clearRoom() {
-    while (roomEl.firstChild) {
-      roomEl.removeChild(roomEl.firstChild)
-    }
+    while (room.firstChild) room.removeChild(room.firstChild)
   }
 
   function spawnDoor() {
     const door = document.createElement('a-box')
-    door.setAttribute('id', 'door')
     door.setAttribute('position', '0 1 -6.8')
     door.setAttribute('width', '2')
     door.setAttribute('height', '2')
     door.setAttribute('depth', '0.2')
-    door.setAttribute('color', '#555')
+    door.setAttribute('color', '#777')
     door.setAttribute('door', '')
-    roomEl.appendChild(door)
+    room.appendChild(door)
   }
 
-  function loadRoom(index) {
+  function loadRoom(i) {
     clearRoom()
+    if (!rooms[i]) return
 
-    if (!rooms[index]) {
-      console.log('Fim do sonho (Isaac ainda não existe)')
-      return
-    }
-
-    // por enquanto TODA sala já abre a porta
     spawnDoor()
-
-    // reposiciona Deus
-    godRig.object3D.position.set(0, 4, 6)
-
-    console.log('Sala atual:', rooms[index].name)
+    godRig.object3D.position.set(0, 1.6, 5)
   }
 
-  // componente da porta
   AFRAME.registerComponent('door', {
     tick: function () {
-      const doorPos = this.el.object3D.position
-      const godPos = godRig.object3D.position
-
-      if (doorPos.distanceTo(godPos) < 1.5) {
-        currentRoom++
-        loadRoom(currentRoom)
+      const d = this.el.object3D.position
+      const g = godRig.object3D.position
+      if (d.distanceTo(g) < 1.5) {
+        roomIndex++
+        loadRoom(roomIndex)
       }
     }
   })
 
-  loadRoom(currentRoom)
+  loadRoom(roomIndex)
 })
