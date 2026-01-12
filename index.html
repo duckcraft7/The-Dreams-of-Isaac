@@ -9,13 +9,12 @@
   <script src="js/start.js"></script>
   <script src="js/vr-toggle.js"></script>
   <script src="js/god.js"></script>
-  <script src="js/enemy.js"></script>
   <script src="js/rooms.js"></script>
 </head>
 
 <body>
 
-<!-- MENU PRINCIPAL -->
+<!-- MENU -->
 <div id="menu"
 style="
 position:fixed;
@@ -29,20 +28,8 @@ color:white;
 font-family:serif;
 z-index:20;
 ">
-
   <h1 style="font-size:56px;">The Dreams of Isaac</h1>
-
-  <p style="opacity:0.7; max-width:600px; text-align:center;">
-    God descends into a dream.<br>
-    Isaac waits at the end.
-  </p>
-
-  <button id="startGame"
-  style="
-  margin-top:40px;
-  padding:15px 40px;
-  font-size:20px;
-  cursor:pointer;">
+  <button id="startGame" style="padding:15px 40px;font-size:20px;">
     Start Game
   </button>
 </div>
@@ -55,38 +42,39 @@ bottom:10px;
 left:10px;
 z-index:15;
 padding:10px 20px;
-font-size:16px;
 display:none;
 ">
 Enter VR
 </button>
 
 <!-- CENA -->
-<a-scene id="scene" vr-mode-ui="enabled: false">
-  <a-entity id="room"></a-entity>
+<a-scene id="scene" vr-mode-ui="enabled:false">
 
-
-  <!-- DEUS (PLAYER) -->
-  <a-entity id="godRig" position="0 4 6" god>
+  <!-- JOGADOR (DEUS) -->
+  <a-entity id="godRig" position="0 1.6 5" god>
     <a-camera id="camera" look-controls="enabled:false"></a-camera>
   </a-entity>
 
   <!-- LUZ -->
-  <a-light type="ambient" intensity="0.5"></a-light>
-  <a-light type="directional" position="0 6 4"></a-light>
+  <a-light type="ambient" intensity="0.7"></a-light>
+  <a-light type="directional" position="0 5 3"></a-light>
 
-  <!-- PORÃO -->
-  <a-plane rotation="-90 0 0" width="14" height="14" color="#222"></a-plane>
+  <!-- CHÃO -->
+  <a-plane
+    rotation="-90 0 0"
+    width="14"
+    height="14"
+    color="#4b3a2f">
+  </a-plane>
 
   <!-- PAREDES -->
-  <a-box position="0 1 -7" width="14" height="2" depth="0.2"></a-box>
-  <a-box position="0 1 7" width="14" height="2" depth="0.2"></a-box>
-  <a-box position="7 1 0" width="0.2" height="2" depth="14"></a-box>
-  <a-box position="-7 1 0" width="0.2" height="2" depth="14"></a-box>
+  <a-box position="0 1 -7" width="14" height="2" depth="0.2" color="#6b4f3f"></a-box>
+  <a-box position="0 1 7"  width="14" height="2" depth="0.2" color="#6b4f3f"></a-box>
+  <a-box position="7 1 0"  width="0.2" height="2" depth="14" color="#6b4f3f"></a-box>
+  <a-box position="-7 1 0" width="0.2" height="2" depth="14" color="#6b4f3f"></a-box>
 
-  <!-- INIMIGOS DO SONHO -->
-  <a-sphere position="2 0.5 -2" radius="0.4" color="darkred" enemy></a-sphere>
-  <a-sphere position="-3 0.5 1" radius="0.4" color="darkred" enemy></a-sphere>
+  <!-- CONTEÚDO DA SALA -->
+  <a-entity id="room"></a-entity>
 
 </a-scene>
 
