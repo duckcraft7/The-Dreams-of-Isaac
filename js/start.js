@@ -3,7 +3,11 @@ window.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById('startGame')
 
   startBtn.onclick = () => {
-    // some com o menu
     menu.style.display = 'none'
+
+    // mostra botão VR
+    if (window.showVRButton) {
+      window.showVRButton()
+    }
   }
 })
