@@ -1,11 +1,12 @@
 AFRAME.registerComponent('god', {
   schema: {
-    speed: { default: 3 },
-    turnSpeed: { default: 60 }
+    speed: { default: 4 },
+    mouseSensitivity: { default: 0.002 }
   },
 
   init: function () {
-    this.move = { f: false, b: false, l: false, r: false }
+    this.move = { f:false, b:false, l:false, r:false }
+    this.yaw = 0
 
     window.addEventListener('keydown', e => {
       if (e.key === 'w') this.move.f = true
@@ -20,17 +21,21 @@ AFRAME.registerComponent('god', {
       if (e.key === 'a') this.move.l = false
       if (e.key === 'd') this.move.r = false
     })
+
+    window.addEventListener('mousemove', e => {
+      if (document.pointerLockElement !== document.body) return
+      this.yaw -= e.movementX * this.data.mouseSensitivity
+    })
   },
 
   tick: function (time, delta) {
     const rig = this.el.object3D
     const dt = delta / 1000
 
-    // rotação esquerda / direita
-    if (this.move.l) rig.rotation.y += THREE.MathUtils.degToRad(this.data.turnSpeed * dt)
-    if (this.move.r) rig.rotation.y -= THREE.MathUtils.degToRad(this.data.turnSpeed * dt)
+    // rotação horizontal (mouse)
+    rig.rotation.y = this.yaw
 
-    // direção baseada NO RIG (não na câmera)
+    // direção frontal baseada no rig
     const dir = new THREE.Vector3(
       Math.sin(rig.rotation.y),
       0,
@@ -39,5 +44,13 @@ AFRAME.registerComponent('god', {
 
     if (this.move.f) rig.position.addScaledVector(dir, -this.data.speed * dt)
     if (this.move.b) rig.position.addScaledVector(dir,  this.data.speed * dt)
+    if (this.move.l) rig.position.addScaledVector(
+      new THREE.Vector3(dir.z, 0, -dir.x),
+      -this.data.speed * dt
+    )
+    if (this.move.r) rig.position.addScaledVector(
+      new THREE.Vector3(dir.z, 0, -dir.x),
+       this.data.speed * dt
+    )
   }
 })
