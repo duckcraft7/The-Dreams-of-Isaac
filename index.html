@@ -7,12 +7,10 @@
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
   <script src="js/start.js"></script>
-  <script src="js/vr-toggle.js"></script>
   <script src="js/god.js"></script>
-  <script src="js/rooms.js"></script>
 </head>
 
-<body>
+<body style="margin:0; overflow:hidden;">
 
 <!-- MENU -->
 <div id="menu"
@@ -26,7 +24,7 @@ align-items:center;
 justify-content:center;
 color:white;
 font-family:serif;
-z-index:20;
+z-index:10;
 ">
   <h1 style="font-size:56px;">The Dreams of Isaac</h1>
   <button id="startGame" style="padding:15px 40px;font-size:20px;">
@@ -34,47 +32,30 @@ z-index:20;
   </button>
 </div>
 
-<!-- BOTÃO VR -->
-<button id="vrToggle"
-style="
-position:fixed;
-bottom:10px;
-left:10px;
-z-index:15;
-padding:10px 20px;
-display:none;
-">
-Enter VR
-</button>
-
 <!-- CENA -->
-<a-scene id="scene" vr-mode-ui="enabled:false">
-
-  <!-- JOGADOR (DEUS) -->
-  <a-entity id="godRig" position="0 1.6 5" god>
-    <a-camera id="camera" look-controls="enabled:false"></a-camera>
-  </a-entity>
+<a-scene>
 
   <!-- LUZ -->
-  <a-light type="ambient" intensity="0.7"></a-light>
-  <a-light type="directional" position="0 5 3"></a-light>
+  <a-light type="ambient" intensity="0.8"></a-light>
+  <a-light type="directional" position="2 5 3"></a-light>
+
+  <!-- JOGADOR (DEUS) -->
+  <a-entity id="godRig" position="0 0 4" god>
+
+    <!-- MODELO 3D DEUS (placeholder) -->
+    <a-box position="0 1 0" width="0.6" height="1.8" depth="0.6" color="white"></a-box>
+
+    <!-- CÂMERA TERCEIRA PESSOA -->
+    <a-camera
+      id="camera"
+      position="0 2 4"
+      look-controls="enabled:false">
+    </a-camera>
+
+  </a-entity>
 
   <!-- CHÃO -->
-  <a-plane
-    rotation="-90 0 0"
-    width="14"
-    height="14"
-    color="#4b3a2f">
-  </a-plane>
-
-  <!-- PAREDES -->
-  <a-box position="0 1 -7" width="14" height="2" depth="0.2" color="#6b4f3f"></a-box>
-  <a-box position="0 1 7"  width="14" height="2" depth="0.2" color="#6b4f3f"></a-box>
-  <a-box position="7 1 0"  width="0.2" height="2" depth="14" color="#6b4f3f"></a-box>
-  <a-box position="-7 1 0" width="0.2" height="2" depth="14" color="#6b4f3f"></a-box>
-
-  <!-- CONTEÚDO DA SALA -->
-  <a-entity id="room"></a-entity>
+  <a-plane rotation="-90 0 0" width="20" height="20" color="#4b3a2f"></a-plane>
 
 </a-scene>
 
