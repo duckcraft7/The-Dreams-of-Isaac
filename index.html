@@ -10,6 +10,7 @@
   <script src="js/vr-toggle.js"></script>
   <script src="js/god.js"></script>
   <script src="js/enemy.js"></script>
+  <script src="js/rooms.js"></script>
 </head>
 
 <body>
@@ -62,6 +63,8 @@ Enter VR
 
 <!-- CENA -->
 <a-scene id="scene" vr-mode-ui="enabled: false">
+  <a-entity id="room"></a-entity>
+
 
   <!-- DEUS (PLAYER) -->
   <a-entity id="godRig" position="0 4 6" god>
