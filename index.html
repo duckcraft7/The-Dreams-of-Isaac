@@ -7,6 +7,7 @@
   <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
   <script src="js/start.js"></script>
+  <script src="js/vr-toggle.js"></script>
   <script src="js/god.js"></script>
   <script src="js/enemy.js"></script>
 </head>
@@ -28,12 +29,10 @@ font-family:serif;
 z-index:20;
 ">
 
-  <h1 style="font-size:56px; margin-bottom:10px;">
-    The Dreams of Isaac
-  </h1>
+  <h1 style="font-size:56px;">The Dreams of Isaac</h1>
 
   <p style="opacity:0.7; max-width:600px; text-align:center;">
-    God descends into the dream.  
+    God descends into a dream.<br>
     Isaac waits at the end.
   </p>
 
@@ -45,22 +44,35 @@ z-index:20;
   cursor:pointer;">
     Start Game
   </button>
-
 </div>
 
-<!-- CENA DO JOGO -->
+<!-- BOTÃO VR -->
+<button id="vrToggle"
+style="
+position:fixed;
+bottom:10px;
+left:10px;
+z-index:15;
+padding:10px 20px;
+font-size:16px;
+display:none;
+">
+Enter VR
+</button>
+
+<!-- CENA -->
 <a-scene id="scene" vr-mode-ui="enabled: false">
 
-  <!-- DEUS (CÂMERA / JOGADOR) -->
+  <!-- DEUS (PLAYER) -->
   <a-entity id="godRig" position="0 4 6" god>
-    <a-camera id="camera"></a-camera>
+    <a-camera id="camera" look-controls="enabled:false"></a-camera>
   </a-entity>
 
   <!-- LUZ -->
   <a-light type="ambient" intensity="0.5"></a-light>
   <a-light type="directional" position="0 6 4"></a-light>
 
-  <!-- PORÃO ONÍRICO -->
+  <!-- PORÃO -->
   <a-plane rotation="-90 0 0" width="14" height="14" color="#222"></a-plane>
 
   <!-- PAREDES -->
