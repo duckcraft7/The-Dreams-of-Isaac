@@ -1,21 +1,25 @@
 window.addEventListener('DOMContentLoaded', () => {
-  const scene = document.querySelector('#scene')
-  const button = document.querySelector('#vrButton')
-  const camera = document.querySelector('#camera')
+  const scene = document.getElementById('scene')
+  const vrBtn = document.getElementById('vrToggle')
+  const camera = document.getElementById('camera')
 
-  let vrEnabled = false
+  let vrOn = false
 
-  button.onclick = () => {
-    vrEnabled = !vrEnabled
+  vrBtn.onclick = () => {
+    vrOn = !vrOn
 
-    if (vrEnabled) {
-      camera.setAttribute('look-controls', 'enabled: true')
+    if (vrOn) {
       scene.enterVR()
-      button.innerText = 'SAIR DO VR'
+      camera.setAttribute('look-controls', 'enabled:true')
+      vrBtn.innerText = 'Exit VR'
     } else {
-      camera.setAttribute('look-controls', 'enabled: false')
       scene.exitVR()
-      button.innerText = 'ENTRAR EM VR'
+      camera.setAttribute('look-controls', 'enabled:false')
+      vrBtn.innerText = 'Enter VR'
     }
+  }
+
+  window.showVRButton = () => {
+    vrBtn.style.display = 'block'
   }
 })
